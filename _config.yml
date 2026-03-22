@@ -3,13 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: 文政's Terminal
+subtitle: '> echo "Hello, World!"'
+description: 'C++ Developer | Chromium | 360 Browser'
 keywords:
-author: John Doe
-language: en
-timezone: ''
+  - C++
+  - Chromium
+  - Browser
+  - Developer
+author: shang
+language: zh-CN
+timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'

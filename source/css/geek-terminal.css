@@ -1,0 +1,294 @@
+/* =========================================
+   Geek Terminal Style for Hexo Butterfly
+   Designed for C++/Chromium Developer
+   ========================================= */
+
+/* 基础 - 终端黑底 */
+:root {
+  --bg-color: #0d1117;
+  --text-color: #3fb950;
+  --text-secondary: #8b949e;
+  --accent-color: #58a6ff;
+  --border-color: #30363d;
+  --code-bg: #161b22;
+  --header-bg: #010409;
+  --card-bg: #161b22;
+  --link-color: #58a6ff;
+  --link-hover: #79c0ff;
+  --selection-bg: #1f6feb;
+}
+
+/* 整体背景 */
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* 导航栏 */
+#nav {
+  background: var(--header-bg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+#nav .site-title,
+#nav .menus-items a {
+  color: var(--text-color) !important;
+}
+#nav .menus-items a:hover {
+  color: var(--link-color) !important;
+}
+
+/* 站点标题 - 像终端 prompt */
+#nav .site-title::before {
+  content: "➜ ~ ";
+  color: var(--accent-color);
+}
+
+/* 卡片 */
+.card-widget {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+}
+
+/* 文章卡片 */
+.recent-post-item {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+}
+
+/* 链接 */
+a {
+  color: var(--link-color) !important;
+  text-decoration: none !important;
+}
+a:hover {
+  color: var(--link-hover) !important;
+}
+
+/* 标题 */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3em;
+}
+
+/* 分割线 */
+hr {
+  border-color: var(--border-color) !important;
+}
+
+/* 代码块 - GitHub Dark 风格 */
+pre, code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
+  background: var(--code-bg) !important;
+  color: #e6edf3 !important;
+}
+
+code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+pre {
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+/* 行内代码 */
+:not(pre) > code {
+  background: rgba(110, 118, 129, 0.4) !important;
+  color: #ff7b72 !important;
+}
+
+/* 引用块 */
+blockquote {
+  background: var(--code-bg) !important;
+  border-left: 4px solid var(--accent-color) !important;
+  color: var(--text-secondary) !important;
+  padding: 10px 16px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+
+/* 搜索框 */
+#search-button,
+.search-dialog {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+#search-input {
+  background: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* 标签页 */
+#tag, #category, #page {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* 页脚 */
+#footer {
+  background: var(--header-bg) !important;
+  border-top: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* 社交链接 */
+.social-link a {
+  color: var(--text-secondary) !important;
+}
+.social-link a:hover {
+  color: var(--link-color) !important;
+}
+
+/* 分页 */
+.pagination .page-number,
+.pagination .extend {
+  color: var(--text-secondary) !important;
+}
+.pagination .current {
+  color: var(--link-color) !important;
+}
+.pagination a:hover {
+  color: var(--link-hover) !important;
+}
+
+/* 选中文字 */
+::selection {
+  background: var(--selection-bg) !important;
+  color: #ffffff !important;
+}
+
+/* 打字机光标效果 - 主页标题 */
+#page h1.site-title {
+  position: relative;
+}
+#page h1.site-title::after {
+  content: "_";
+  animation: blink 1s step-end infinite;
+  color: var(--accent-color);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 终端启动动画 */
+@keyframes terminal-boot {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.recent-post-item {
+  animation: terminal-boot 0.3s ease-out;
+}
+
+/* 菜单项 - 像终端命令 */
+.menus-items a::before {
+  content: "$ ";
+  color: var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.menus-items a:hover::before {
+  opacity: 1;
+}
+
+/* 首页 banner - 移除图片，使用纯黑 */
+#banner {
+  background: var(--bg-color) !important;
+}
+
+/* 归档页面 */
+.archive-article {
+  background: transparent !important;
+  border-left: 2px solid var(--accent-color) !important;
+  padding-left: 16px !important;
+  margin: 16px 0 !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+  
+  body {
+    background: var(--bg-color) !important;
+  }
+}
+
+/* GitHub 风格按钮效果 */
+button,
+.btn {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--link-color) !important;
+  border-radius: 6px !important;
+  transition: all 0.2s !important;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--border-color) !important;
+  border-color: var(--link-color) !important;
+}
+
+/* 时间轴 */
+#post-comment .comment-tabs .active {
+  border-bottom: 2px solid var(--accent-color) !important;
+}
+
+/* 表格 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+}
+
+th, td {
+  border: 1px solid var(--border-color) !important;
+  padding: 8px 12px;
+}
+
+th {
+  background: var(--code-bg) !important;
+}
+
+tr:nth-child(even) {
+  background: rgba(22, 27, 34, 0.5);
+}
+
+/* 键盘按键样式 */
+kbd {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.9em;
+  box-shadow: 0 1px 0 var(--border-color);
+}
