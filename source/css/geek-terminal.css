@@ -1,294 +1,439 @@
 /* =========================================
-   Geek Terminal Style for Hexo Butterfly
-   Designed for C++/Chromium Developer
+   CRT Terminal Style - 复古计算机效果
+   Retro Computer / Old Terminal Aesthetic
    ========================================= */
 
-/* 基础 - 终端黑底 */
+/* 基础 - 经典终端绿 */
 :root {
-  --bg-color: #0d1117;
-  --text-color: #3fb950;
-  --text-secondary: #8b949e;
-  --accent-color: #58a6ff;
-  --border-color: #30363d;
-  --code-bg: #161b22;
-  --header-bg: #010409;
-  --card-bg: #161b22;
-  --link-color: #58a6ff;
-  --link-hover: #79c0ff;
-  --selection-bg: #1f6feb;
+  --crt-green: #33ff33;
+  --crt-green-dim: #1a8c1a;
+  --crt-amber: #ffb000;
+  --crt-bg: #0a0a0a;
+  --crt-scanline: rgba(0, 0, 0, 0.15);
+  --crt-glow: rgba(51, 255, 51, 0.1);
+  --terminal-font: 'VT323', 'Courier New', 'Consolas', monospace;
 }
 
-/* 整体背景 */
+/* 引入 VT323 复古字体 */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* 整体背景 - CRT屏幕黑 */
 body {
-  background-color: var(--bg-color) !important;
-  color: var(--text-color) !important;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
+  background-color: var(--crt-bg) !important;
+  color: var(--crt-green) !important;
+  font-family: var(--terminal-font) !important;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-x: hidden;
 }
 
-/* 滚动条 */
+/* CRT 屏幕外框效果 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: 
+    /* 扫描线 */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      var(--crt-scanline) 2px,
+      var(--crt-scanline) 4px
+    ),
+    /* 屏幕边缘暗角 */
+    radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+  animation: scanlines 0.1s linear infinite;
+}
+
+/* CRT 屏幕发光效果 */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(
+    ellipse at center,
+    var(--crt-glow) 0%,
+    transparent 70%
+  );
+  animation: screen-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+@keyframes screen-glow {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+/* 滚动条 - 复古风格 */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
+  background: #111;
+  border: 1px solid var(--crt-green-dim);
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-color);
+  background: #0a0a0a;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 4px;
+  background: var(--crt-green-dim);
+  border: 1px solid var(--crt-green);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+  background: var(--crt-green);
 }
 
-/* 导航栏 */
+/* 导航栏 - 终端风格 */
 #nav {
-  background: var(--header-bg) !important;
-  border-bottom: 1px solid var(--border-color) !important;
+  background: #000 !important;
+  border-bottom: 2px solid var(--crt-green) !important;
+  box-shadow: 0 0 10px var(--crt-green-dim);
 }
+
 #nav .site-title,
 #nav .menus-items a {
-  color: var(--text-color) !important;
+  color: var(--crt-green) !important;
+  text-shadow: 0 0 5px var(--crt-green), 0 0 10px var(--crt-green);
 }
+
 #nav .menus-items a:hover {
-  color: var(--link-color) !important;
+  color: #fff !important;
+  text-shadow: 0 0 5px #fff, 0 0 10px var(--crt-green);
+  animation: flicker 0.1s infinite;
 }
 
-/* 站点标题 - 像终端 prompt */
+/* 终端风格标题 */
 #nav .site-title::before {
-  content: "➜ ~ ";
-  color: var(--accent-color);
+  content: "[";
+  margin-right: 8px;
+}
+#nav .site-title::after {
+  content: "] $";
+  margin-left: 8px;
 }
 
-/* 卡片 */
-.card-widget {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 6px !important;
-}
-
-/* 文章卡片 */
+/* 卡片 - CRT边框 */
+.card-widget,
 .recent-post-item {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 6px !important;
+  background: #000 !important;
+  border: 1px solid var(--crt-green-dim) !important;
+  border-radius: 0 !important;
+  box-shadow: 
+    inset 0 0 20px rgba(51, 255, 51, 0.05),
+    0 0 5px var(--crt-green-dim);
 }
 
-/* 链接 */
+/* 文章列表 */
+.recent-post-item {
+  margin: 10px 0;
+  padding: 10px;
+}
+.recent-post-item:hover {
+  border-color: var(--crt-green) !important;
+  box-shadow: 
+    inset 0 0 30px rgba(51, 255, 51, 0.1),
+    0 0 10px var(--crt-green-dim);
+}
+
+/* 链接 - 闪烁效果 */
 a {
-  color: var(--link-color) !important;
+  color: var(--crt-green) !important;
   text-decoration: none !important;
+  text-shadow: 0 0 2px var(--crt-green);
 }
 a:hover {
-  color: var(--link-hover) !important;
+  color: #fff !important;
+  background: var(--crt-green);
+  color: #000 !important;
+  animation: text-flicker 0.2s infinite;
+}
+
+@keyframes text-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
 }
 
 /* 标题 */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--text-color) !important;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.3em;
+  color: var(--crt-green) !important;
+  border-bottom: 1px dashed var(--crt-green-dim);
+  text-shadow: 0 0 5px var(--crt-green-dim);
+  font-weight: normal;
+  letter-spacing: 2px;
 }
 
-/* 分割线 */
+h1::before { content: "# "; }
+h2::before { content: "## "; }
+h3::before { content: "### "; }
+
+/* 分割线 - 艺术化 */
 hr {
-  border-color: var(--border-color) !important;
+  border: none;
+  border-top: 1px dashed var(--crt-green-dim);
+  margin: 20px 0;
+}
+hr::after {
+  content: "***";
+  display: block;
+  text-align: center;
+  color: var(--crt-green-dim);
+  margin-top: -10px;
 }
 
-/* 代码块 - GitHub Dark 风格 */
+/* 代码块 - 终端风格 */
 pre, code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
-  background: var(--code-bg) !important;
-  color: #e6edf3 !important;
+  font-family: var(--terminal-font) !important;
+  background: #000 !important;
+  color: var(--crt-green) !important;
+  border: 1px solid var(--crt-green-dim);
+  text-shadow: 0 0 2px var(--crt-green-dim);
 }
 
 code {
   padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
 }
 
 pre {
-  padding: 16px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
+  padding: 15px;
   overflow-x: auto;
+  box-shadow: 
+    inset 0 0 20px rgba(51, 255, 51, 0.1),
+    0 0 5px var(--crt-green-dim);
 }
 
-/* 行内代码 */
-:not(pre) > code {
-  background: rgba(110, 118, 129, 0.4) !important;
-  color: #ff7b72 !important;
-}
-
-/* 引用块 */
+/* 引用块 - 终端提示风格 */
 blockquote {
-  background: var(--code-bg) !important;
-  border-left: 4px solid var(--accent-color) !important;
-  color: var(--text-secondary) !important;
-  padding: 10px 16px;
-  margin: 16px 0;
-  border-radius: 0 6px 6px 0;
+  background: #000 !important;
+  border-left: 4px solid var(--crt-green) !important;
+  color: var(--crt-green-dim) !important;
+  padding: 10px 15px;
+  margin: 15px 0;
+  font-style: italic;
+}
+blockquote::before {
+  content: "> ";
+  color: var(--crt-green);
 }
 
 /* 搜索框 */
 #search-button,
 .search-dialog {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
+  background: #000 !important;
+  border: 2px solid var(--crt-green) !important;
+  box-shadow: 0 0 10px var(--crt-green-dim);
 }
 #search-input {
-  background: var(--bg-color) !important;
-  color: var(--text-color) !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-/* 标签页 */
-#tag, #category, #page {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
+  background: #000 !important;
+  color: var(--crt-green) !important;
+  border: 1px solid var(--crt-green-dim) !important;
+  font-family: var(--terminal-font) !important;
 }
 
 /* 页脚 */
 #footer {
-  background: var(--header-bg) !important;
-  border-top: 1px solid var(--border-color) !important;
-  color: var(--text-secondary) !important;
-}
-
-/* 社交链接 */
-.social-link a {
-  color: var(--text-secondary) !important;
-}
-.social-link a:hover {
-  color: var(--link-color) !important;
+  background: #000 !important;
+  border-top: 2px solid var(--crt-green) !important;
+  color: var(--crt-green-dim) !important;
+  text-shadow: 0 0 2px var(--crt-green-dim);
 }
 
 /* 分页 */
 .pagination .page-number,
 .pagination .extend {
-  color: var(--text-secondary) !important;
+  color: var(--crt-green-dim) !important;
+  border: 1px solid var(--crt-green-dim);
+  padding: 5px 10px;
 }
 .pagination .current {
-  color: var(--link-color) !important;
+  color: #000 !important;
+  background: var(--crt-green) !important;
+  border-color: var(--crt-green);
 }
 .pagination a:hover {
-  color: var(--link-hover) !important;
+  background: var(--crt-green-dim);
+  color: #000 !important;
 }
 
 /* 选中文字 */
 ::selection {
-  background: var(--selection-bg) !important;
-  color: #ffffff !important;
+  background: var(--crt-green) !important;
+  color: #000 !important;
 }
 
-/* 打字机光标效果 - 主页标题 */
+/* 归档文章 */
+.archive-article {
+  background: transparent !important;
+  border-left: 3px solid var(--crt-green-dim) !important;
+  padding: 10px !important;
+  margin: 10px 0 !important;
+}
+.archive-article:hover {
+  border-left-color: var(--crt-green) !important;
+  background: rgba(51, 255, 51, 0.05) !important;
+}
+
+/* 终端光标效果 */
 #page h1.site-title {
   position: relative;
+  display: inline-block;
 }
 #page h1.site-title::after {
-  content: "_";
-  animation: blink 1s step-end infinite;
-  color: var(--accent-color);
+  content: "█";
+  animation: cursor-blink 1s step-end infinite;
+  margin-left: 5px;
+  color: var(--crt-green);
 }
 
-@keyframes blink {
+@keyframes cursor-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-/* 终端启动动画 */
-@keyframes terminal-boot {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
+/* 启动动画 */
 .recent-post-item {
-  animation: terminal-boot 0.3s ease-out;
+  animation: crt-on 0.3s ease-out;
 }
 
-/* 菜单项 - 像终端命令 */
-.menus-items a::before {
-  content: "$ ";
-  color: var(--accent-color);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.menus-items a:hover::before {
-  opacity: 1;
-}
-
-/* 首页 banner - 移除图片，使用纯黑 */
-#banner {
-  background: var(--bg-color) !important;
-}
-
-/* 归档页面 */
-.archive-article {
-  background: transparent !important;
-  border-left: 2px solid var(--accent-color) !important;
-  padding-left: 16px !important;
-  margin: 16px 0 !important;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-  :root {
-    font-size: 14px;
+@keyframes crt-on {
+  0% { 
+    opacity: 0;
+    transform: scale(1.02);
+    filter: brightness(2);
   }
-  
-  body {
-    background: var(--bg-color) !important;
+  50% {
+    opacity: 0.5;
+    filter: brightness(1.5);
   }
-}
-
-/* GitHub 风格按钮效果 */
-button,
-.btn {
-  background: var(--code-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--link-color) !important;
-  border-radius: 6px !important;
-  transition: all 0.2s !important;
-}
-
-button:hover,
-.btn:hover {
-  background: var(--border-color) !important;
-  border-color: var(--link-color) !important;
-}
-
-/* 时间轴 */
-#post-comment .comment-tabs .active {
-  border-bottom: 2px solid var(--accent-color) !important;
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
 }
 
 /* 表格 */
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 16px 0;
+  margin: 15px 0;
+  border: 1px solid var(--crt-green-dim);
 }
 
 th, td {
-  border: 1px solid var(--border-color) !important;
+  border: 1px solid var(--crt-green-dim) !important;
   padding: 8px 12px;
 }
 
 th {
-  background: var(--code-bg) !important;
+  background: #000 !important;
+  color: var(--crt-green) !important;
+  text-shadow: 0 0 3px var(--crt-green);
 }
 
 tr:nth-child(even) {
-  background: rgba(22, 27, 34, 0.5);
+  background: rgba(51, 255, 51, 0.05);
 }
 
-/* 键盘按键样式 */
+/* 按钮 */
+button, .btn {
+  background: #000 !important;
+  border: 2px solid var(--crt-green) !important;
+  color: var(--crt-green) !important;
+  font-family: var(--terminal-font) !important;
+  cursor: pointer;
+  transition: all 0.1s !important;
+}
+
+button:hover, .btn:hover {
+  background: var(--crt-green) !important;
+  color: #000 !important;
+  box-shadow: 0 0 10px var(--crt-green);
+}
+
+/* 键盘按键 */
 kbd {
-  background: var(--code-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 0.9em;
-  box-shadow: 0 1px 0 var(--border-color);
+  background: #000 !important;
+  border: 1px solid var(--crt-green-dim) !important;
+  color: var(--crt-green) !important;
+  font-family: var(--terminal-font) !important;
+  box-shadow: 
+    0 0 5px var(--crt-green-dim),
+    inset 0 0 5px rgba(51, 255, 51, 0.1);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
+/* 侧边栏 */
+aside {
+  border-left: 1px solid var(--crt-green-dim);
+  padding-left: 15px;
+}
+
+/* 标签 */
+.tag-cloud a {
+  color: var(--crt-green-dim) !important;
+  border: 1px solid var(--crt-green-dim);
+  padding: 2px 8px;
+  margin: 2px;
+  display: inline-block;
+}
+.tag-cloud a:hover {
+  color: #000 !important;
+  background: var(--crt-green) !important;
+  box-shadow: 0 0 10px var(--crt-green);
+}
+
+/* 开机提示 */
+#content {
+  position: relative;
+}
+
+/* 菜单 - 命令提示符风格 */
+.menus-items a::before {
+  content: "$ ";
+  color: var(--crt-green-dim);
+}
+.menus-items a::after {
+  content: "";
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* 站点描述 - ASCII 艺术风格 */
+.subtitle {
+  font-size: 14px;
+  color: var(--crt-green-dim);
 }
