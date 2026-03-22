@@ -4,7 +4,7 @@
 
 # Site
 title: 文政's Terminal
-subtitle: '[ SYSTEM READY... ]'
+subtitle: '> echo "Hello, World!"'
 description: 'C++ Developer | Chromium | 360 Browser'
 keywords:
   - C++
