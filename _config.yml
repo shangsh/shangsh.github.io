@@ -3,15 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 文政's Terminal
+title: haoge's Terminal
 subtitle: '> echo "Hello, World!"'
-description: 'C++ Developer | Chromium | 360 Browser'
+description: 'Developer | Geek | Tech'
 keywords:
-  - C++
-  - Chromium
-  - Browser
-  - Developer
-author: shang
+  - tech
+  - developer
+author: haoge
 language: zh-CN
 timezone: Asia/Shanghai
 
