@@ -30,6 +30,7 @@ jobs:
           
       - name: Install Dependencies
         run: |
+          npm config set registry https://registry.npmmirror.com
           npm ci
           
       - name: Build Hexo
