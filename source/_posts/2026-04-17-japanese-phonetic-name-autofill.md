@@ -1,0 +1,18 @@
+---
+title: "Chrome 自动填充中日语拼音名称支持的改进"
+date: 2026-04-17 08:00:00
+categories:
+  - Chromium Blog
+tags:
+  - Chromium
+  - Chrome
+  - 翻译
+---
+
+> 原文：https://developer.chrome.com/blog/japanese-phonetic-name-autofill?hl=en
+> 本文章由 AI 自动翻译自 Chromium 官方博客
+
+了解 Chrome 自动填充功能如何改进对日语假名注音（Furigana）的支持，让用户更轻松地填写网页表单。
+
+---
+*原文发布于 2026-04-17，由 haoge's Terminal 自动同步。*
