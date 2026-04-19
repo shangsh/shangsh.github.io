@@ -130,4 +130,4 @@ class FakeView : public LynxNativeView {
 
 ---
 
-未完待续，Day 3 见。
+Day 3 见：[FakeView 实战与架构全景图](/2026-04-20-lynx-source-learning-day3/)
