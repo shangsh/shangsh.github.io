@@ -72,6 +72,4 @@ lynx_view_ = builder.Build();
 
 标准 Win32 消息循环。Lynx 的渲染和窗口事件跑在同一个线程。
 
----
 
-未完待续，Day 2 见。
